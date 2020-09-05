@@ -26,6 +26,8 @@ try:
 except:
     pass
 
+driver.close()
+
 if(alert):
     sys.exit(1)
 else:

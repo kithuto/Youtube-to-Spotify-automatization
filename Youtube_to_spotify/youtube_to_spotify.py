@@ -2,6 +2,7 @@ import json
 import requests
 from selenium import webdriver
 import time
+import sys
 from youtube_dl import YoutubeDL
 from secret import spotify_id, spotify_pass
 
@@ -11,11 +12,12 @@ class createPlaylist:
         self.spotify_token = self.get_spotify_token()
         self.songs_list = []
         self.playlist_id = ""
+        self.num_songs = 0
 
     def get_spotify_token(self):
         options = webdriver.ChromeOptions()
 
-        #options.add_argument("headless")
+        options.add_argument("headless")
 
         driver = webdriver.Chrome(executable_path=r"drivers/chromedriver.exe",options=options)
         driver.get('https://developer.spotify.com/console/post-playlists/')
@@ -54,6 +56,8 @@ class createPlaylist:
                 finished = True
             except:
                 pass
+        
+        driver.close()
 
         return token
 
@@ -84,6 +88,7 @@ class createPlaylist:
             song, track, artist = self.process_song_title(song['title'])
             url = self.get_spotify_url(track, artist)
             self.songs_list.append(url)
+            self.num_songs +=1
 
     def get_spotify_url(self, song_name, artist=None):
         query = "https://api.spotify.com/v1/search?query=track%3A{}+artist%3A{}&type=track&offset=0&limit=20".format(
@@ -170,9 +175,10 @@ class createPlaylist:
 if __name__ == '__main__':
     print('Name for the playlist in spotify:')
     name = input()
-    print('Description (blank if no description):')
+    print('Description:')
     description = input()
     print("Playlist Youtube link:")
     playlist = input()
     cp = createPlaylist()
     cp.new_playlist(playlist, name, description)
+    sys.exit(cp.num_songs)
