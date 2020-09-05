@@ -6,7 +6,7 @@ set version=%version:~15,6%
 py Youtube_to_spotify/version_checker.py %version%
 if %ERRORLEVEL% == 1 (
     copy Youtube_to_spotify/secret.py
-    rmdir Youtube_to_spotify
+    rmdir /s /q Youtube_to_spotify
     echo Downloading package from github...
     curl -s https://api.github.com/repos/kithuto/Youtube-to-Spotify-automatization/releases/latest | findstr "tag_name" > temp
     set /p version=<temp
