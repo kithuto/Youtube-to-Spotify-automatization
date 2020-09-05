@@ -9,7 +9,7 @@ curl -L -o Youtube_to_spotify.zip %LOCATION%
 tar -xf Youtube_to_spotify.zip
 del Youtube_to_spotify.zip
 xcopy Youtube-to-Spotify-automatization-%version_num%\Youtube_to_spotify Youtube_to_spotify /E /H /C /I
-rmdir Youtube-to-Spotify-automatization-%version_num%
+rmdir -r Youtube-to-Spotify-automatization-%version_num%
 echo Checking if Python is installed...
 py -V > vers
 if errorlevel 1 (
