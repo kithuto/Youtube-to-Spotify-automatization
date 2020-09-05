@@ -23,6 +23,6 @@ if %ERRORLEVEL% == 1 (
     copy secret.py Youtube_to_spotify
     del secret.py
     cd Youtube_to_spotify
-    echo "version = '$version'" > program_version.py
+    echo version = '%version%' > program_version.py
     cd ../
 )

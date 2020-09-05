@@ -32,10 +32,10 @@ echo Youtube_to_spotify\upgrader.bat >> youtube_to_spotify.bat
 echo cd Youtube_to_spotify >> youtube_to_spotify.bat
 echo py youtube_to_spotify.py >> youtube_to_spotify.bat
 echo echo %ERRORLEVEL% songs added to the Spotify list! >> youtube_to_spotify.bat
-echo set /p r="Press enter to close the program. " >> youtube_to_spotify.sh
+echo set /p r=Press enter to close the program. >> youtube_to_spotify.bat
 cd Youtube_to_spotify
-echo "Youtube to spotify installed successfully!"
-echo "version = '$version'" > program_version.py
+echo Youtube to spotify installed successfully!
+echo version = '%version%' > program_version.py
 set correct=0
 :while
 if %correct% == 0 (
@@ -56,4 +56,6 @@ if %correct% == 0 (
     )
     goto :while
 )
+echo Correct user and password!
 set /p id=Press enter to close the installer 
+exit
