@@ -84,16 +84,58 @@ class createPlaylist:
     def get_playlist_songs_urls(self, playlist_url):
         result = YoutubeDL({}).extract_info(playlist_url, download=False)
         songs = result['entries']
+        print("Adding songs to the spotify list...")
         for song in songs:
             song, track, artist = self.process_song_title(song['title'])
-            url = self.get_spotify_url(track, artist)
-            self.songs_list.append(url)
-            self.num_songs +=1
+            url = self.get_spotify_url(track, artist, song)
+            if url != None:
+                self.songs_list.append(url)
+                self.num_songs +=1
 
-    def get_spotify_url(self, song_name, artist=None):
-        query = "https://api.spotify.com/v1/search?query=track%3A{}+artist%3A{}&type=track&offset=0&limit=20".format(
-            song_name,
-            artist
+    def get_spotify_url(self, song_name, artist, fullname):
+        if song_name != "" and artist != "":
+            query = "https://api.spotify.com/v1/search?query=track%3A{}+artist%3A{}&type=track&offset=0&limit=20".format(
+                song_name,
+                artist
+            )
+            response = requests.get(
+                query,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer {}".format(self.spotify_token)
+                }
+            )
+            response_json = response.json()
+            if response_json["tracks"]["total"] != 0:
+                songs = response_json["tracks"]["items"]
+
+                # only use the first song
+                url = songs[0]["uri"]
+
+                return url
+
+            query = "https://api.spotify.com/v1/search?query=track%3A{}+artist%3A{}&type=track&offset=0&limit=20".format(
+                artist,
+                song_name
+            )
+            response = requests.get(
+                query,
+                headers={
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer {}".format(self.spotify_token)
+                }
+            )
+            response_json = response.json()
+            if response_json["tracks"]["total"] != 0:
+                songs = response_json["tracks"]["items"]
+
+                # only use the first song
+                url = songs[0]["uri"]
+
+                return url
+        
+        query = "https://api.spotify.com/v1/search?q={}&type=track&offset=0&limit=20".format(
+            fullname
         )
         response = requests.get(
             query,
@@ -103,12 +145,15 @@ class createPlaylist:
             }
         )
         response_json = response.json()
-        songs = response_json["tracks"]["items"]
+        if response_json["tracks"]["total"] != 0:
+            songs = response_json["tracks"]["items"]
 
-        # only use the first song
-        url = songs[0]["uri"]
+            # only use the first song
+            url = songs[0]["uri"]
 
-        return url
+            return url
+
+        return None
 
     def process_song_title(self, song):
         if '(' or '[' in song:
@@ -179,6 +224,8 @@ if __name__ == '__main__':
     description = input()
     print("Playlist Youtube link:")
     playlist = input()
+    print("Logging in with the spotify user "+spotify_id+"...")
     cp = createPlaylist()
+    print("Creating spotify list...")
     cp.new_playlist(playlist, name, description)
     sys.exit(cp.num_songs)
