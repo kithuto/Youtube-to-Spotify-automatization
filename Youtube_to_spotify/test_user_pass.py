@@ -6,6 +6,7 @@ import time
 options = webdriver.ChromeOptions()
 
 options.add_argument("headless")
+options.add_argument("--log-level=3")
 
 driver = webdriver.Chrome(executable_path=r"drivers/chromedriver.exe",options=options)
 driver.get('https://accounts.spotify.com/es/login?continue=https:%2F%2Fwww.spotify.com%2Fes%2Faccount%2Foverview%2F')

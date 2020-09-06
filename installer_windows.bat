@@ -22,7 +22,7 @@ if errorlevel 1 (
 del vers
 if not "%v:~0,8%" == "Python 3" (
     echo Installing Python...
-    Youtube_to_spotify/python/python-3.7.9-amd64.exe
+    call Youtube_to_spotify\python\python-3.7.9-amd64.exe
 )
 echo Installing requirements...
 pip install requests
@@ -49,7 +49,7 @@ if %correct% == 0 (
     echo Checking user and pass in spotify...
     echo spotify_id = '%user%'> secret.py
     echo spotify_pass = '%password%'>> secret.py
-    py test_user_pass.py
+    call py test_user_pass.py
 )
 if %correct% == 0 (
     if %ERRORLEVEL% == 0 (
@@ -60,5 +60,6 @@ if %correct% == 0 (
     goto :while
 )
 echo Correct user and password!
-set /p id=Press enter to close the installer 
-exit
+echo Click to youtube_to_spotify.bat to execute the program
+set /p a=Press enter to close the installer 
+taskkill /im cmd.exe
