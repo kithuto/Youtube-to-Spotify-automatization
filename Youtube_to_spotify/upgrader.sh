@@ -19,6 +19,7 @@ rm Youtube_to_spotify/secret.py
 cp secret.py Youtube_to_spotify
 rm secret.py
 cd Youtube_to_spotify
+rm -r python
 echo "version = '$version'" >> program_version.py
 cd ../
 fi

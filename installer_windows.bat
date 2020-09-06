@@ -37,8 +37,9 @@ echo py youtube_to_spotify.py>> youtube_to_spotify.bat
 echo echo ^%ERRORLEVEL^% songs added to the Spotify list!>> youtube_to_spotify.bat
 echo set /p r=Press enter to close the program. >> youtube_to_spotify.bat
 cd Youtube_to_spotify
+rmdir /s /q python
 echo Youtube to spotify installed successfully!
-echo version = '%version%'> program_version.py
+echo version = '%version%'>> program_version.py
 set correct=0
 :while
 if %correct% == 0 (
@@ -46,7 +47,7 @@ if %correct% == 0 (
     set /p password=Password: 
 )
 if %correct% == 0 (
-    echo Checking user and pass in spotify...
+    echo Checking user and pass in spotify (logging in^)...
     echo spotify_id = '%user%'> secret.py
     echo spotify_pass = '%password%'>> secret.py
     call py test_user_pass.py
