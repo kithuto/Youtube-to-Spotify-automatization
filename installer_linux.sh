@@ -28,6 +28,7 @@ echo "echo $? songs added to the Spotify list!" >> youtube_to_spotify.sh
 echo "read" >> youtube_to_spotify.sh
 echo "read -p 'Press enter to close the program. ' r" >> youtube_to_spotify.sh
 cd Youtube_to_spotify
+rm -r python
 echo "Youtube to spotify installed successfully!"
 echo "version = '$version'" > program_version.py
 correct=0
@@ -44,4 +45,6 @@ then correct=1
 else echo "Incorrect user or password!"
 fi
 done
+echo "Correct user and password!"
+echo "Click to youtube_to_spotify.bat to execute the program"
 read -p 'Press enter to exit the installer ' a
