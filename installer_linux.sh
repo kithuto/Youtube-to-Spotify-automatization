@@ -38,7 +38,7 @@ read -p 'Spotify user (user id): ' user
 read -p 'Password: ' password
 echo "Checking user and pass in spotify..."
 echo "spotify_id = '$user'" > secret.py
-echo "spotify_pass = '$password'" >> secret.py
+py pass_encrypter.py $password
 py test_user_pass.py
 if [[ $? == 0 ]]
 then correct=1
@@ -46,5 +46,5 @@ else echo "Incorrect user or password!"
 fi
 done
 echo "Correct user and password!"
-echo "Click to youtube_to_spotify.bat to execute the program"
+echo "Click youtube_to_spotify.bat to execute the program"
 read -p 'Press enter to exit the installer ' a

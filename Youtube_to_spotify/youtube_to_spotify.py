@@ -5,6 +5,7 @@ import time
 import sys
 from youtube_dl import YoutubeDL
 from secret import spotify_id, spotify_pass
+from pass_encrypter import decrypt
 
 class createPlaylist:
     
@@ -44,7 +45,7 @@ class createPlaylist:
         user.send_keys(spotify_id)
 
         password = driver.find_element_by_xpath('//*[@id="login-password"]')
-        password.send_keys(spotify_pass)
+        password.send_keys(decrypt(spotify_pass))
 
         log_in = driver.find_element_by_xpath('//*[@id="login-button"]')
         log_in.click()

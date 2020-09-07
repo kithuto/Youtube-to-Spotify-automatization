@@ -1,5 +1,6 @@
 from selenium import webdriver
 from secret import spotify_id, spotify_pass
+from pass_encrypter import decrypt
 import sys
 import time
 
@@ -15,7 +16,7 @@ user = driver.find_element_by_xpath('//*[@id="login-username"]')
 user.send_keys(spotify_id)
 
 password = driver.find_element_by_xpath('//*[@id="login-password"]')
-password.send_keys(spotify_pass)
+password.send_keys(decrypt(spotify_pass))
 
 submit = driver.find_element_by_xpath('//*[@id="login-button"]')
 submit.click()

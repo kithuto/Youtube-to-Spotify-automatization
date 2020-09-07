@@ -49,7 +49,7 @@ if %correct% == 0 (
 if %correct% == 0 (
     echo Checking user and pass in spotify (logging in^)...
     echo spotify_id = '%user%'> secret.py
-    echo spotify_pass = '%password%'>> secret.py
+    call py pass_encrypter.py %password%
     call py test_user_pass.py
 )
 if %correct% == 0 (
@@ -61,6 +61,6 @@ if %correct% == 0 (
     goto :while
 )
 echo Correct user and password!
-echo Click to youtube_to_spotify.bat to execute the program
+echo Click youtube_to_spotify.bat to execute the program
 set /p a=Press enter to close the installer 
 taskkill /im cmd.exe
