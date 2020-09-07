@@ -17,14 +17,13 @@ Youtube_to_spotify/python/python-3.7.9-amd64.exe
 fi
 echo "Installing requirements..."
 pip install requests
-pip install youtube_dl
+pip install youtube_dl --upgrade
 pip install selenium
 echo "Creating executable..."
 echo "echo Loading..." >> youtube_to_spotify.sh
 echo "Youtube_to_spotify/upgrader.sh" >> youtube_to_spotify.sh
 echo "cd Youtube_to_spotify" >> youtube_to_spotify.sh
 echo "py youtube_to_spotify.py" >> youtube_to_spotify.sh
-echo "echo $? songs added to the Spotify list!" >> youtube_to_spotify.sh
 echo "read" >> youtube_to_spotify.sh
 echo "read -p 'Press enter to close the program. ' r" >> youtube_to_spotify.sh
 cd Youtube_to_spotify

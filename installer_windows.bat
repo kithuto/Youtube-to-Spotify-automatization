@@ -26,15 +26,14 @@ if not "%v:~0,8%" == "Python 3" (
 )
 echo Installing requirements...
 pip install requests
-pip install youtube_dl
+pip install youtube_dl --upgrade
 pip install selenium
 echo Creating executable...
 echo @echo off> youtube_to_spotify.bat
 echo echo Loading...>> youtube_to_spotify.bat
-echo call Youtube_to_spotify/upgrader.bat>> youtube_to_spotify.bat
+:: echo call Youtube_to_spotify/upgrader.bat>> youtube_to_spotify.bat
 echo cd Youtube_to_spotify>> youtube_to_spotify.bat
 echo py youtube_to_spotify.py>> youtube_to_spotify.bat
-echo echo ^%ERRORLEVEL^% songs added to the Spotify list!>> youtube_to_spotify.bat
 echo set /p r=Press enter to close the program. >> youtube_to_spotify.bat
 cd Youtube_to_spotify
 rmdir /s /q python

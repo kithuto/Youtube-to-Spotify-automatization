@@ -2,7 +2,6 @@ import json
 import requests
 from selenium import webdriver
 import time
-import sys
 from youtube_dl import YoutubeDL
 from secret import spotify_id, spotify_pass
 from pass_encrypter import decrypt
@@ -157,15 +156,24 @@ class createPlaylist:
         return None
 
     def process_song_title(self, song):
-        if '(' or '[' in song:
+        if '(' in song:
             i = 0
             for char in song:
-                if char == '(' or char == '[':
+                if char == '(':
                     pos = i 
                     break
                 i += 1
+            song = song[0:pos]
+
+        if '[' in song:
+            i = 0
+            for char in song:
+                if char == '[':
+                    pos = i 
+                    break
+                i += 1
+            song = song[0:pos]
         
-        song = song[0:pos]
         artist = ""
         track = ""
 
@@ -178,15 +186,36 @@ class createPlaylist:
         if ' & ' in song:
             song = song.replace(" & ", ", ")
 
-        if '-' or '|' in song:
+        if '-' in song:
             i = 0
             for char in song:
-                if char == '-' or char == '|':
+                if char == '-':
                     pos = i 
                     break
                 i += 1
             artist = song[0:pos]
             track = song[pos+1:-1]
+
+        elif '|' in song:
+            i = 0
+            for char in song:
+                if char == '|':
+                    pos = i 
+                    break
+                i += 1
+            artist = song[0:pos]
+            track = song[pos+1:-1]
+
+        if 'by' in song:
+            i = 0
+            song = song.replace("by ", "-")
+            for char in song:
+                if char == '-':
+                    pos = i 
+                    break
+                i += 1
+            track = song[0:pos]
+            artist = song[pos+1:-1]
 
         if ' Ft.' in artist:
             artist = artist.replace(" Ft.", ", ")
@@ -229,4 +258,4 @@ if __name__ == '__main__':
     cp = createPlaylist()
     print("Creating spotify list...")
     cp.new_playlist(playlist, name, description)
-    sys.exit(cp.num_songs)
+    print(str(cp.num_songs)+" songs added to the Spotify list!")
