@@ -30,15 +30,14 @@ class createPlaylist:
             try:
                 modify_public = driver.find_element_by_xpath('//*[@id="oauth-modal"]/div/div/div[2]/form/div[1]/div/div/div[1]/div/label/span')
                 modify_public.click()
+                modify_private = driver.find_element_by_xpath('//*[@id="oauth-modal"]/div/div/div[2]/form/div[1]/div/div/div[2]/div/label/span')
+                modify_private.click()
+
+                submit = driver.find_element_by_xpath('//*[@id="oauthRequestToken"]')
+                submit.click()
                 finished = True
             except:
                 pass
-
-        modify_private = driver.find_element_by_xpath('//*[@id="oauth-modal"]/div/div/div[2]/form/div[1]/div/div/div[2]/div/label/span')
-        modify_private.click()
-
-        submit = driver.find_element_by_xpath('//*[@id="oauthRequestToken"]')
-        submit.click()
 
         user = driver.find_element_by_xpath('//*[@id="login-username"]')
         user.send_keys(spotify_id)
@@ -51,6 +50,11 @@ class createPlaylist:
         
         finished = False
         while not finished:
+            try:
+                accept = driver.find_element_by_xpath('//*[@id="auth-accept"]')
+                accept.click()
+            except:
+                pass
             try:
                 token = driver.find_element_by_xpath('//*[@id="oauth-input"]').get_attribute('value')
                 finished = True
