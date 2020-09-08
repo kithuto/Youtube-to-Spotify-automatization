@@ -31,7 +31,7 @@ pip install selenium
 echo Creating executable...
 echo @echo off> youtube_to_spotify.bat
 echo echo Loading...>> youtube_to_spotify.bat
-:: echo call Youtube_to_spotify/upgrader.bat>> youtube_to_spotify.bat
+echo call Youtube_to_spotify/upgrader.bat>> youtube_to_spotify.bat
 echo cd Youtube_to_spotify>> youtube_to_spotify.bat
 echo py youtube_to_spotify.py>> youtube_to_spotify.bat
 echo set /p r=Press enter to close the program. >> youtube_to_spotify.bat
