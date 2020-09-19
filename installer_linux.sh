@@ -19,6 +19,7 @@ echo "Installing requirements..."
 pip install requests
 pip install youtube_dl --upgrade
 pip install selenium
+pip install cryptography
 echo "Creating executable..."
 echo "echo Loading..." >> youtube_to_spotify.sh
 echo "Youtube_to_spotify/upgrader.sh" >> youtube_to_spotify.sh

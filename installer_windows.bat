@@ -28,6 +28,7 @@ echo Installing requirements...
 pip install requests
 pip install youtube_dl --upgrade
 pip install selenium
+pip install cryptography
 echo Creating executable...
 echo @echo off> youtube_to_spotify.bat
 echo echo Loading...>> youtube_to_spotify.bat
