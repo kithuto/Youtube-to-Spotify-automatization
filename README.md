@@ -1,6 +1,6 @@
 # Youtube-to-Spotify-automatization
 
-This program takes a given playlist from Youtube and automatically creating a Spotify Playlist.
+This program takes a given playlist from Youtube and automatically creates a Spotify Playlist.
 
 ## Instalation instructions
 
